@@ -1,0 +1,57 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gbsub/Core/utils/constans.dart';
+import 'package:gbsub/Features/YourClinicc/Models/reservation_models.dart';
+import 'package:gbsub/Features/YourClinicc/Ui/Widgets/custom_contact_message_icon.dart';
+import 'package:gbsub/Features/YourClinicc/Ui/Widgets/custom_reservation_informations.dart';
+import 'package:gbsub/Features/YourClinicc/Ui/Widgets/custom_buttons_row.dart';
+import 'package:gbsub/Features/YourClinicc/Ui/Widgets/custom_divider.dart';
+import 'package:gbsub/Features/YourClinicc/Ui/Widgets/custom_reservation_item_image.dart';
+
+class CustomUpcomingReservationItem extends StatelessWidget {
+  const CustomUpcomingReservationItem({
+    super.key,
+    required this.reservationModels,
+  });
+  final ReservationModels reservationModels;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 24.w),
+      child: Column(
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              CutomReservationItemImage(
+                pic: '$imageUrl${reservationModels.pic}',
+              ),
+              CustomReservationInformations(
+                  name: reservationModels.name,
+                  month: reservationModels.month,
+                  day: reservationModels.day,
+                  year: reservationModels.year,
+                  appointmentTime: reservationModels.appointmentTime),
+              CustomConatctMessageIcon(
+                name: reservationModels.name,
+                phoneNumber: reservationModels.number,
+              )
+            ],
+          ),
+          const CustomReservationDivider(),
+          SizedBox(
+            height: 5.h,
+          ),
+          CustomReservationItemButtonsRow(
+            reservationModels: reservationModels,
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
+        ],
+      ),
+    );
+  }
+}
